@@ -21,3 +21,12 @@ class Course(models.Model):
 
 	def __str__(self):
 		return(f"{self.coursename}")
+
+
+class Package(models.Model):
+	packagename = models.CharField(max_length=45)
+	packagedescription = models.CharField(max_length=250)
+	packageprice = models.CharField(max_length=250)
+
+	def __str__(self):
+		return(f"{self.packagename}")

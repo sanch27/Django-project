@@ -65,6 +65,30 @@
 
 {% endif %}
 
+<table class="table table-striped table-hover table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Package Name</th>
+      <th scope="col">Package Description</th>
+      <th scope="col">Package Price</th>
+      <th scope="col">ID</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% if packages %}
+    {% for package in packages %}
+      <tr>
+        <td>{{ package.packagename }}</td>
+        <td>{{ package.packagedescription }}</td>
+        <td>{{ package.packageprice }}</td>
+        <td><a href="{% url 'package' package.id %}">{{ package.id }}</a></td>
+  </tr>
+{% endfor %}
+
+{% endif %}
+
+
 {% else %}
 
 <div class="col-md-6 offset-md-3">

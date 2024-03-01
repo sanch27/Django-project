@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm, AddRecordForm, AddCourseForm
-from .models import Record, Course
+from .forms import SignUpForm, AddRecordForm, AddCourseForm, AddPackageForm
+from .models import Record, Course, Package
 
 
 def home(request):
 	records = Record.objects.all()
 	courses = Course.objects.all()
+	packages = Package.objects.all()
 	# Check to see if logging in
 	if request.method == 'POST':
 		username = request.POST['username']
@@ -146,6 +147,56 @@ def update_course(request, pk):
 			messages.success(request, "Course Has Been Updated!")
 			return redirect('home')
 		return render(request, 'update_course.html', {'form':form})
+	else:
+		messages.success(request, "You Must Be Logged In...")
+		return redirect('home')
+	
+
+
+
+def customer_package(request, pk):
+	if request.user.is_authenticated:
+		# Look Up Records
+		customer_package = Package.objects.get(id=pk)
+		return render(request, 'package.html', {'customer_package':customer_package})
+	else:
+		messages.success(request, "You Must Be Logged In To View That Page...")
+		return redirect('home')
+	
+def delete_package(request, pk):
+	if request.user.is_authenticated:
+		delete_it = Package.objects.get(id=pk)
+		delete_it.delete()
+		messages.success(request, "Package Deleted Successfully...")
+		return redirect('home')
+	else:
+		messages.success(request, "You Must Be Logged In To Do That...")
+		return redirect('home')
+
+
+def add_package(request):
+	form = AddPackageForm(request.POST or None)
+	if request.user.is_authenticated:
+		if request.method == "POST":
+			if form.is_valid():
+				add_package = form.save()
+				messages.success(request, "Package Added...")
+				return redirect('home')
+		return render(request, 'add_package.html', {'form':form})
+	else:
+		messages.success(request, "You Must Be Logged In...")
+		return redirect('home')
+
+
+def update_package(request, pk):
+	if request.user.is_authenticated:
+		current_package = Package.objects.get(id=pk)
+		form = AddCourseForm(request.POST or None, instance=current_package)
+		if form.is_valid():
+			form.save()
+			messages.success(request, "Package Has Been Updated!")
+			return redirect('home')
+		return render(request, 'update_package.html', {'form':form})
 	else:
 		messages.success(request, "You Must Be Logged In...")
 		return redirect('home')

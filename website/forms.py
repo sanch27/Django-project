@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Record, Course
+from .models import Record, Course, Package
 
 class SignUpForm(UserCreationForm):
 	email = forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))
@@ -56,4 +56,15 @@ class AddRecordForm(forms.ModelForm):
 
 	class Meta:
 		model = Course
+		exclude = ("user",)
+
+
+#Create Add Package Form
+	class AddPackageForm(forms.ModelForm):
+		packagename = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Package Name", "class":"form-control"}), label="")
+	packagedescription = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Package Description", "class":"form-control"}), label="")
+	packageprice = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Package Price", "class":"form-control"}), label="")
+	
+	class Meta:
+		model = Package
 		exclude = ("user",)
