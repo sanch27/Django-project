@@ -50,18 +50,18 @@ class AddRecordForm(forms.ModelForm):
 		exclude = ("user",)
 
 #Create Add Course Form
-	class AddCourseForm(forms.ModelForm):
-		coursename = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Course Name", "class":"form-control"}), label="")
-		coursedescription = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Course Description", "class":"form-control"}), label="")	
+class AddCourseForm(forms.ModelForm):
+	coursename = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Course Name", "class":"form-control"}), label="")
+	coursedescription = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Course Description", "class":"form-control"}), label="")	
 
 	class Meta:
 		model = Course
 		exclude = ("user",)
 
 
-#Create Add Package Form
-	class AddPackageForm(forms.ModelForm):
-		packagename = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Package Name", "class":"form-control"}), label="")
+# #Create Add Package Form
+class AddPackageForm(forms.ModelForm):
+	packagename = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Package Name", "class":"form-control"}), label="")
 	packagedescription = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Package Description", "class":"form-control"}), label="")
 	packageprice = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Package Price", "class":"form-control"}), label="")
 	

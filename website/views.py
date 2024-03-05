@@ -23,7 +23,7 @@ def home(request):
 			messages.success(request, "There Was An Error Logging In, Please Try Again...")
 			return redirect('home')
 	else:
-		return render(request, 'home.html', {'records':records})
+		return render(request, 'home.html', {'records':records, 'courses':courses, 'packages':packages})
 
 
 
@@ -106,7 +106,7 @@ def update_record(request, pk):
 	
 def customer_course(request, pk):
 	if request.user.is_authenticated:
-		# Look Up Records
+		# Look Up Course
 		customer_course = Course.objects.get(id=pk)
 		return render(request, 'course.html', {'customer_course':customer_course})
 	else:
@@ -191,7 +191,7 @@ def add_package(request):
 def update_package(request, pk):
 	if request.user.is_authenticated:
 		current_package = Package.objects.get(id=pk)
-		form = AddCourseForm(request.POST or None, instance=current_package)
+		form = AddPackageForm(request.POST or None, instance=current_package)
 		if form.is_valid():
 			form.save()
 			messages.success(request, "Package Has Been Updated!")
