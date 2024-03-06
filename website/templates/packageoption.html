@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+
+<p class="card-text">
+<strong>OptionID: </strong>{{ customer_packageoptions.id }}</p>
+
+<p class="card-text">
+<strong>CourseID: </strong>{{ customer_packageoptions.courseid }}
+</p>
+
+<p class="card-text">
+    <strong>PackageID: </strong>{{ customer_packageoptions.packageid }}
+    </p>
+
+
+
+    
+    
+  </div>
+</div>
+
+<br/><br/>
+<a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+
+<a href="{% url 'delete_packageoptions' customer_packageoptions.id %}" class="btn btn-danger">Delete</a>
+
+<a href="{% url 'update_packageoptions' customer_packageoptions.id %}" class="btn btn-secondary">Update PackageOptions</a>
+		
+
+{% endblock %}

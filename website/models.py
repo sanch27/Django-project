@@ -30,3 +30,20 @@ class Package(models.Model):
 
 	def __str__(self):
 		return(f"{self.packagename}")
+
+class PackageOptions(models.Model):
+    OptionID = models.AutoField(primary_key=True)
+    packageid = models.ForeignKey('Package', on_delete=models.CASCADE)
+    courseid = models.ForeignKey('Course', on_delete=models.CASCADE)
+
+
+
+class Subscription(models.Model):
+    SubscriptionID = models.AutoField(primary_key=True)
+    recordid = models.ForeignKey('Record', on_delete=models.CASCADE)
+    packageid = models.ForeignKey('Package', on_delete=models.CASCADE)
+    PaymentDate = models.DateField()
+    ExpiryDate = models.DateField()
+	
+def __str__(self):
+		return (f"SubscriptionID: {self.SubscriptionID}, recordid: {self.recordid}, packageid: {self.packageid}, PaymentDate: {self.PaymentDate}, ExpiryDate: {self.ExpiryDate}")

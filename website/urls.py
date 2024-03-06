@@ -21,4 +21,14 @@ urlpatterns = [
     path('delete_package/<int:pk>', views.delete_package, name='delete_package'),
     path('add_package/', views.add_package, name='add_package'),
     path('update_package/<int:pk>', views.update_package, name='update_package'),
+
+    path('packageoptions/<int:pk>', views.customer_packageoptions, name='packageoptions'),
+    path('delete_packageoption/<int:pk>', views.delete_packageoptions, name='delete_packageoptions'),
+    path('add_packageoption/', views.add_packageoptions, name='add_packageoptions'),
+    path('update_packageoption/<int:pk>', views.update_packageoptions, name='update_packageoptions'),
+
+    path('subscription/<int:pk>', views.customer_subscription, name='subscription'),
+    path('delete_subscription/<int:pk>', views.delete_subscription, name='delete_subscription'),
+    path('add_subscription/', views.add_subscription, name='add_subscription'),
+    path('update_subscription/<int:pk>', views.update_subscription, name='update_subscription'),
 ]

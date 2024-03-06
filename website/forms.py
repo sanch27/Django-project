@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Record, Course, Package
+from .models import Record, Course, Package, PackageOptions, Subscription
 
 class SignUpForm(UserCreationForm):
 	email = forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))
@@ -67,4 +67,26 @@ class AddPackageForm(forms.ModelForm):
 	
 	class Meta:
 		model = Package
+		exclude = ("user",)
+
+ #Create Add PackageOptions Form
+class AddPackageOptionForm(forms.ModelForm):
+	OptionID = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Option ID", "class":"form-control"}), label="")
+	courseid  = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Course ID", "class":"form-control"}), label="")
+	packageid = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Package ID", "class":"form-control"}), label="")
+	
+	class Meta:
+		model = PackageOptions
+		exclude = ("user",)
+
+
+# #Create Add Subscription Form
+class AddSubscriptionForm(forms.ModelForm):
+	paymentdate = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Payment Date", "class":"form-control"}), label="")
+	expirydate = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Expiry Date", "class":"form-control"}), label="")
+	packageid = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Package ID", "class":"form-control"}), label="")
+	recordid = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Record ID", "class":"form-control"}), label="")
+	
+	class Meta:
+		model = Subscription
 		exclude = ("user",)
